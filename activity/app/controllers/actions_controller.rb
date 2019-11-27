@@ -1,7 +1,12 @@
 class ActionsController < ApplicationController
 
   def create
-    Action.create(data: params[:data].as_json)
+    Rails.logger.warn params.as_json
+    data = {"data" => params[:action].as_json, "status" => 200}
+    Rails.logger.warn "***>#{data}<***"
+    a = Action.create(data)
+    render json: {"data" => "hello"}, status: :ok
+    #Action.create(data: params[:action].as_json)
   end
 
   def index
